@@ -1,0 +1,40 @@
+syntax = "proto3";
+option go_package = "github.com/rorski/grpc-job-manager/internal/job";
+package job;
+
+service JobManager {
+  rpc Start(StartRequest) returns (StartResponse) {}
+  rpc Stop(StopRequest) returns (StopResponse) {}
+  rpc Status(StatusRequest) returns (StatusResponse) {}
+  rpc Output(OutputRequest) returns (stream OutputResponse) {}
+}
+
+message StartRequest {
+  string cmd = 1;
+  repeated string args = 2;
+}
+message StartResponse {
+  string uuid = 1;
+}
+
+message StopRequest {
+  string uuid = 1;
+}
+message StopResponse {}
+
+message StatusRequest {
+  string uuid = 1;
+}
+message StatusResponse {
+  string status = 1;   // RUNNING, STOPPED, ZOMBIE, EXITED
+  bool terminated = 2; // Bool of whether this job was stopped by the Stop() method
+  int32 exit_code = 3; // Exit code of the job
+}
+
+message OutputRequest {
+  string uuid = 1;
+}
+message OutputResponse {
+  bytes output = 1;
+}
+
