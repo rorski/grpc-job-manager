@@ -59,15 +59,14 @@ func TestAuthzStartAsAdmin(t *testing.T) {
 	userCreds, err := loadClientCreds(caCert, "admin")
 	assert.NoError(t, err)
 	conn, err := grpc.Dial(fmt.Sprintf("%s:%d", conf.Host, conf.Port), grpc.WithTransportCredentials(userCreds))
-	defer conn.Close()
 	assert.NoError(t, err)
+	defer conn.Close()
 
 	// try to start a "ps" command as the admin role
 	jobClient := job.NewJobManagerClient(conn)
 	res, err := jobClient.Start(context.Background(), &job.StartRequest{Cmd: "ps"})
 	assert.NoError(t, err)
 	assert.NotEmpty(t, res.Uuid)
-
 }
 
 // TestAuthzStartAsUser tests starting a "ps" job with an user role (from the client cert)
@@ -88,8 +87,8 @@ func TestAuthzStartAsUser(t *testing.T) {
 	userCreds, err := loadClientCreds(caCert, "user")
 	assert.NoError(t, err)
 	conn, err := grpc.Dial(fmt.Sprintf("%s:%d", conf.Host, conf.Port), grpc.WithTransportCredentials(userCreds))
-	defer conn.Close()
 	assert.NoError(t, err)
+	defer conn.Close()
 
 	// try to start a "ps" command as the admin role
 	jobClient := job.NewJobManagerClient(conn)

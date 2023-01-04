@@ -6,7 +6,7 @@ require (
 	github.com/google/uuid v1.3.0
 	github.com/stretchr/testify v1.8.0
 	github.com/urfave/cli/v2 v2.11.0
-	golang.org/x/sys v0.0.0-20220919091848-fb04ddd9f9c8
+	golang.org/x/sys v0.3.0
 	google.golang.org/grpc v1.48.0
 	google.golang.org/protobuf v1.27.1
 )

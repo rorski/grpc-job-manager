@@ -144,7 +144,7 @@ func NewClient() (app *cli.App, err error) {
 	// tear down grpc connection after running client
 	app.After = func(ctx *cli.Context) error {
 		if err = conn.Close(); err != nil {
-			return fmt.Errorf("error closing grpc client connection: %v\n", err)
+			return fmt.Errorf("error closing grpc client connection: %v", err)
 		}
 		return nil
 	}

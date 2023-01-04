@@ -60,7 +60,7 @@ func newGrpcServer(conf Config, creds credentials.TransportCredentials) (*grpc.S
 	return server, listener, nil
 }
 
-// New creates a new gRPC server from a Config
+// Serve creates a new gRPC server from a Config
 func Serve(conf Config) error {
 	creds, err := setupCreds(conf.Certificate, conf.Key, conf.CA)
 	if err != nil {
